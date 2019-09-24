@@ -104,7 +104,7 @@ module Frodo
     def navigation_properties_for_entity(entity_name)
       type_definition = get_type_definition_for_entity_name(entity_name)
 
-      parent_properties = recurse_on_parent_type(type_definition, :navigation_properties_for_entity)
+      parent_properties = recurse_on_parent_type(type_definition)
 
       properties_to_return = type_definition.xpath('./NavigationProperty').map do |nav_property_def|
         [
@@ -121,7 +121,7 @@ module Frodo
     def referential_constraints_for_entity(entity_name)
       type_definition = get_type_definition_for_entity_name(entity_name)
 
-      parent_refcons = recurse_on_parent_type(type_definition, :referential_constraints_for_entity)
+      parent_refcons = recurse_on_parent_type(type_definition)
 
       refcons_to_return = type_definition.xpath('./NavigationProperty[ReferentialConstraint]').map do |nav_property_def|
         [
@@ -158,7 +158,7 @@ module Frodo
       type_definition = get_type_definition_for_entity_name(entity_name)
       properties_to_return = {}
 
-      parent_properties = recurse_on_parent_type(type_definition, :properties_for_entity)
+      parent_properties = recurse_on_parent_type(type_definition)
 
       type_definition.xpath('./Property').each do |property_xml|
         property_name, property = process_property_from_xml(property_xml)
@@ -198,13 +198,13 @@ module Frodo
       return type_definition
     end
 
-    def recurse_on_parent_type(type_definition, meth)
-      parent_refcons = if base_type = type_definition.attributes['BaseType']
+    def recurse_on_parent_type(type_definition)
+      meth = caller_locations(1,1)[0].label
+      if base_type = type_definition.attributes['BaseType']
         parent_type = base_type.value.split('.').last
-        method(meth).call(parent_type)
-      else
-        {}
+        return method(meth).call(parent_type)
       end
+      return {}
     end
 
   end
