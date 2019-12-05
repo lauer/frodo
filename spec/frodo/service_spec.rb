@@ -139,6 +139,33 @@ describe Frodo::Service do
     end
   end
 
+  describe '#with_metadata?' do
+    let(:options){{
+      name: 'ODataDemo',
+      metadata_file: metadata_file
+    }}
+    let(:subject) { Frodo::Service.new(service_url, options) }
+
+    it { expect(subject.with_metadata?).to be true}
+
+    context "when with_metadata true" do
+      let(:options){{
+        name: 'ODataDemo',
+        metadata_file: metadata_file,
+        with_metadata: true
+      }}
+      it { expect(subject.with_metadata?).to be true}
+    end
+    context "when with_metadata true" do
+      let(:options){{
+        name: 'ODataDemo',
+        metadata_file: metadata_file,
+        with_metadata: true
+      }}
+      it { expect(subject.with_metadata?).to be true}
+    end
+  end
+
   describe '#get_property_type' do
     it { expect(subject).to respond_to(:get_property_type) }
     it { expect(subject.get_property_type('ODataDemo.Product', 'ID')).to eq('Edm.Int32') }

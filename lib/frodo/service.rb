@@ -173,7 +173,7 @@ module Frodo
     end
 
     def with_metadata?
-      !options[:with_metadata] || options[:with_metadata]
+      !options.key?(:with_metadata) || options[:with_metadata]
     end
 
     private
