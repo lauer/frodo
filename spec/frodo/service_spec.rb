@@ -130,7 +130,13 @@ describe Frodo::Service do
   describe '#[]' do
     let(:entity_sets) { subject.entity_sets.keys.map { |name| subject[name] } }
     it { expect(entity_sets).to all(be_a(Frodo::EntitySet)) }
-    it { expect {subject['Nonexistant']}.to raise_error(ArgumentError) }
+    it { expect { subject['Nonexistant'] }.to raise_error(ArgumentError) }
+    context 'when with_metadata returns false' do
+      before { allow(subject).to receive(:with_metadata?).and_return(false) }
+      it 'returns  empty EntitySet' do
+        expect(subject['Nonexistant']).to be_a(Frodo::EntitySet)
+      end
+    end
   end
 
   describe '#get_property_type' do
