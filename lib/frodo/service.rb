@@ -1,4 +1,3 @@
-require 'pry'
 module Frodo
   # Encapsulates the basic details and functionality needed to interact with an
   # Frodo service.
