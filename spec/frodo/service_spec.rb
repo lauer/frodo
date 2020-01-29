@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frodo::Service do
   let(:service_url) { 'http://services.odata.org/V4/OData/OData.svc' }
   let(:metadata_file) { 'spec/fixtures/files/metadata.xml' }
-  let(:options){{name: 'ODataDemo', with_metadata:true, metadata_file: metadata_file }}
+  let(:options){{name: 'ODataDemo', metadata_file: metadata_file }}
   let(:subject) { Frodo::Service.new(service_url, options) }
 
   describe '.new' do
@@ -44,7 +44,7 @@ describe Frodo::Service do
     end
 
     context "without 'with_metadata' option" do
-      let(:options){{name: 'ODataDemo',  metadata_file: metadata_file }}
+      let(:options){{name: 'ODataDemo', with_metadata:false, metadata_file: metadata_file }}
       it "call 'register_custom_types'" do
         expect_any_instance_of(Frodo::Service).to_not receive(:register_custom_types)
         subject
