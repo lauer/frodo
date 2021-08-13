@@ -216,7 +216,7 @@ module Frodo
       @id ||= lambda {
         entity_set = self.entity_set.andand.name
         entity_set ||= context.split('#').last.split('/').first
-        "#{entity_set}(#{self[primary_key]})"
+        "#{self[primary_key]}"
       }.call
     end
 
