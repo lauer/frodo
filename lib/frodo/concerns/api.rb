@@ -140,19 +140,18 @@ module Frodo
       # Public: Update a record.
       #
       # entity_set - The set the entity belongs to
+      # primary_key - The unique entity id that references to it
       # attrs   - Hash of attributes to set on the record.
       #
       # Examples
       #
       #   # Update the leads with id '073ca9c8-2a41-e911-a81d-000d3a1d5a0b'
-      #   client.update!('leads', 'leadid' => '073ca9c8-2a41-e911-a81d-000d3a1d5a0b', "firstname" => 'Whizbang Corp')
+      #   client.update!('leads', '073ca9c8-2a41-e911-a81d-000d3a1d5a0b', "firstname" => 'Whizbang Corp')
       #
       # Returns true if the entity was successfully updated.
       # Raises an exception if an error is returned from Dynamics.
-      def update!(entity_set_name, primary_key, attrs, additional_headers={})
-        raise ArgumentError, 'ID field missing from provided attributes' unless attrs.has_key?(primary_key)
-
-        url_chunk = "#{entity_set_name}(#{attrs[primary_key]})"
+      def update!(entity_set_name, primary_key, additional_headers: {}, **attrs)
+        url_chunk = "#{entity_set_name}(#{primary_key})"
         api_patch url_chunk, attrs do |req|
           req.headers.merge!(additional_headers)
         end
