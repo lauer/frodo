@@ -1,3 +1,4 @@
+require_relative 'adal'
 require 'uri'
 require 'date'
 require 'time'
@@ -8,6 +9,7 @@ require 'logger'
 require 'andand'
 require 'json'
 require 'faraday_middleware'
+
 
 require 'frodo/concerns/api'
 require 'frodo/concerns/authentication'

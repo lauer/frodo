@@ -20,6 +20,10 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.2.0'
 
+  spec.add_runtime_dependency 'jwt', '~> 1.5'
+  spec.add_runtime_dependency 'uri_template', '~> 0.7'
+  spec.add_runtime_dependency 'httpclient', '~> 2.8.3'
+
   spec.add_dependency 'nokogiri', '~> 1.8'
   spec.add_dependency 'faraday', '~> 1.7'
   spec.add_dependency 'faraday_middleware', '~> 1.1.0'

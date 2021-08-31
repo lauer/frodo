@@ -15,6 +15,9 @@ module Frodo
 
       # Internal: Determines what middleware will be used based on the options provided
       def authentication_middleware
+        if adal?
+          return Frodo::Middleware::Authentication::FADAL
+        end
         if oauth_refresh?
           return Frodo::Middleware::Authentication::Token
         end
@@ -48,6 +51,10 @@ module Frodo
         options[:refresh_token] &&
           options[:client_id] &&
           options[:client_secret]
+      end
+
+      def adal?
+        options[:adal_auth]
       end
     end
   end
