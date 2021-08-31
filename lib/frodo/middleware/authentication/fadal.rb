@@ -2,7 +2,6 @@ module Frodo
   # Authentication middleware used if client_id, client_secret, and client_credentials: true are set
   class Middleware::Authentication::FADAL < Frodo::Middleware::Authentication
     def authenticate!
-      binding.pry
       ctx = ADAL::AuthenticationContext.new(::ADAL::Authority::WORLD_WIDE_AUTHORITY)
       user_cred = ADAL::UserCredential.new(@options[:username], @options[:password])
       tk = ctx.acquire_token_for_user(@options[:instance_url], @options[:client_id], user_cred)
