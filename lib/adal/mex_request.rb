@@ -23,7 +23,7 @@
 require_relative './mex_response'
 require_relative './util'
 
-require 'net/http'
+require 'httpclient'
 require 'uri'
 
 module ADAL
@@ -44,9 +44,8 @@ module ADAL
 
     # @return MexResponse
     def execute
-      request = Net::HTTP::Get.new(@endpoint.path)
-      request.add_field('Content-Type', 'application/soap+xml')
-      MexResponse.parse(http(@endpoint).request(request).body)
+      response = HTTPClient.get(@endpoint, header: {'Content-Type' => 'application/soap+xml'})
+      MexResponse.parse(response.body)
     end
   end
 end

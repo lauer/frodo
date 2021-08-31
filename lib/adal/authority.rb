@@ -23,7 +23,8 @@
 require_relative './logging'
 
 require 'json'
-require 'net/http'
+#require 'net/http'
+require 'httpclient'
 require 'uri'
 require 'uri_template'
 
@@ -130,12 +131,12 @@ module ADAL
     #   The tenant discovery endpoint, if found. Otherwise nil.
     def validated_dynamically?
       logger.verbose("Attempting instance discovery at: #{discovery_uri}.")
-      http_response = Net::HTTP.get(discovery_uri)
-      if http_response.nil?
+      http_response = HTTPClient.get(discovery_uri)
+      unless http_response.body
         logger.error('Dynamic validation received no response from endpoint.')
         return false
       end
-      parse_dynamic_validation(JSON.parse(http_response))
+      parse_dynamic_validation(JSON.parse(http_response.body))
     end
 
     # @return [Boolean]
