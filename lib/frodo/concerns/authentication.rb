@@ -31,8 +31,7 @@ module Frodo
       def password?
         options[:username] &&
           options[:password] &&
-          options[:client_id] &&
-          options[:tenant_id]
+          options[:client_id]
       end
 
       # Internal: Returns true if oauth client_credentials flow should be used for
