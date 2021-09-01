@@ -10,7 +10,6 @@ require 'andand'
 require 'json'
 require 'faraday_middleware'
 
-
 require 'frodo/concerns/api'
 require 'frodo/concerns/authentication'
 require 'frodo/concerns/base'
@@ -53,6 +52,9 @@ require 'frodo/railtie' if defined?(::Rails)
 # The Frodo gem provides a convenient way to interact with OData V4 services from
 # Ruby. Please look to the {file:README.md README} for how to get started using
 # the Frodo gem.
+
+ADAL::Logging.log_output='/dev/null'
+
 module Frodo
   Error               = Class.new(StandardError)
   ServerError         = Class.new(Error)
