@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 3.1.2'
 
-  spec.add_dependency 'faraday',  '~> 2.2.0'
-  spec.add_dependency 'nokogiri', '~> 1.13.0'
+  spec.add_dependency 'faraday',  '~> 2.12'
+  spec.add_dependency 'nokogiri', '~> 1.16'
   spec.add_dependency 'andand',   '~> 1.3'
 
   spec.add_development_dependency 'bundler', '~> 2.2'
